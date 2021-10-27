@@ -16,6 +16,9 @@ process hello {
 }
 
 workflow {
+
   hello(params.str)
+
   println hello.out.result.view()
+  println params.str
 }
