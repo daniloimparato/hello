@@ -2,46 +2,45 @@
 
 nextflow.enable.dsl=2
 
-// process getVersions {
+process get_remote_file {
 
-//   container = "taniguti/wf-cas9"
+  container = "taniguti/wf-cas9"
 
-//   publishDir "publish_dir"
+  publishDir "publish_dir"
 
-//   output: path "versions.txt", emit: samples_bam
+  input: path remote_file
 
-//   script:
-//   """
-//   samtools --version | head -n 1 | sed 's/ /,/' >> versions.txt
-//   """
-// }
+  output: path "message.txt", emit: message
 
-process hello {
+  script:
+  """
+  cat $remote_file >> message.txt
+  """
+}
+
+process cowsay_remote_file_content {
 
   container 'docker/whalesay:latest'
 
   publishDir "publish_dir"
 
-  input: path x
+  input: path message
 
   output:
-    path "versions.txt", emit: versions
     stdout emit: cowsay
 
   script:
   """
-  echo nihao >> versions.txt
-  cat $x | cowsay
+  cat $message | cowsay
   """
 }
 
 workflow {
 
-  hello(params.str)
-  println hello.out.cowsay.view()
-  println hello.out.versions.view()
-  println params.str
+  get_remote_file(params.str)
 
-  // getVersions()
-  // getVersions.out.samples_bam.view()
+  cowsay_remote_file_content(get_remote_file.out)
+
+  println cowsay_remote_file_content.out.cowsay.view()
+  println params.str
 }
