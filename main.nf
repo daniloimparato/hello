@@ -6,16 +6,16 @@ process hello {
 
   container 'docker/whalesay:latest'
 
-  input: val x
+  input: path x
 
   output: stdout emit: result
 
   """
-  cowsay '${x}'
+  cat $x | cowsay
   """
 }
 
 workflow {
-    hello(params.str)
-    println hello.out.result.view()
+  hello(params.str)
+  println hello.out.result.view()
 }
