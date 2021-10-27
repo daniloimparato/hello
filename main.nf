@@ -2,10 +2,12 @@
 
 nextflow.enable.dsl=2
 
+// chosen_image = "docker.io/docker/whalesay:latest"
+chosen_image = "docker.io/taniguti/wf-cas9:latest"
+
 process get_remote_file {
 
-  container = "docker.io/docker/whalesay:latest"
-  // container = "docker.io/taniguti/wf-cas9:latest"
+  container = chosen_image
 
   input: path remote_file
 
@@ -19,8 +21,7 @@ process get_remote_file {
 
 process cat_remote_file_content {
 
-  container = "docker.io/docker/whalesay:latest"
-  // container = "docker.io/taniguti/wf-cas9:latest"
+  container = chosen_image
 
   input: path message
 
