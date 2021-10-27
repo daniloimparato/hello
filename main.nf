@@ -22,7 +22,7 @@ process get_remote_file {
 
 process cowsay_remote_file_content {
 
-  container 'docker/whalesay:latest'
+  container 'docker.io/docker/whalesay:latest'
 
   publishDir "publish_dir"
 
