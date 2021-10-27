@@ -23,7 +23,8 @@ process get_remote_file {
 process cat_remote_file_content {
 
   // container 'docker.io/docker/whalesay:latest'
-  container = "quay.io/nextflow/bash:latest"
+  // container = "quay.io/nextflow/bash:latest"
+  container = "docker.io/taniguti/wf-cas9:latest"
 
   publishDir "publish_dir"
 
