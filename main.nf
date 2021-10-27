@@ -1,14 +1,21 @@
 #!/usr/bin/env nextflow
 
-cheers = Channel.from 'Bonjour', 'Ciao', 'Hello', 'Hola'
+nextflow.enable.dsl=2
 
-process sayHello {
-  echo true
-  input: 
-    val x from cheers
-  script:
-    """
-    echo '$x world!'
-    """
+process hello {
+
+  container 'docker/whalesay:latest'
+
+  input: val x
+
+  output: stdout emit: result
+
+  """
+  cowsay '${x}'
+  """
 }
 
+workflow {
+    hello(params.str)
+    println hello.out.result.view()
+}
