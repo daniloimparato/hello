@@ -4,7 +4,7 @@ nextflow.enable.dsl=2
 
 process get_remote_file {
 
-  container = "quay.io/nextflow/bash"
+  container = "taniguti/wf-cas9"
 
   publishDir "publish_dir"
 
