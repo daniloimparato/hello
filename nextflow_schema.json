@@ -14,7 +14,7 @@
                 "str": {
                     "type": "string",
                     "description": "Message",
-                    "default": "default hello"
+                    "default": "https://raw.githubusercontent.com/daniloimparato/hello/master/data/str.txt"
                 }
             }
         },
