@@ -2,30 +2,35 @@
 
 nextflow.enable.dsl=2
 
-process getVersions {
+// process getVersions {
 
-  container = "taniguti/wf-cas9"
+//   container = "taniguti/wf-cas9"
 
-  publishDir "publish_dir"
+//   publishDir "publish_dir"
 
-  output: path "versions.txt", emit: samples_bam
+//   output: path "versions.txt", emit: samples_bam
 
-  script:
-  """
-  samtools --version | head -n 1 | sed 's/ /,/' >> versions.txt
-  """
-}
+//   script:
+//   """
+//   samtools --version | head -n 1 | sed 's/ /,/' >> versions.txt
+//   """
+// }
 
 process hello {
 
   container 'docker/whalesay:latest'
 
+  publishDir "publish_dir"
+
   input: path x
 
-  output: stdout emit: result
+  output:
+    path "versions.txt", emit: versions
+    stdout emit: cowsay
 
   script:
   """
+  echo nihao >> versions.txt
   cat $x | cowsay
   """
 }
@@ -33,9 +38,10 @@ process hello {
 workflow {
 
   hello(params.str)
-  println hello.out.result.view()
+  println hello.out.cowsay.view()
+  println hello.out.versions.view()
   println params.str
 
-  getVersions()
-  getVersions.out.samples_bam.view()
+  // getVersions()
+  // getVersions.out.samples_bam.view()
 }
