@@ -4,11 +4,8 @@ nextflow.enable.dsl=2
 
 process get_remote_file {
 
-  // container = "taniguti/wf-cas9"
+  container = "docker.io/docker/whalesay:latest"
   // container = "docker.io/taniguti/wf-cas9:latest"
-  container = "quay.io/nextflow/bash:latest"
-
-  publishDir "publish_dir"
 
   input: path remote_file
 
@@ -22,16 +19,12 @@ process get_remote_file {
 
 process cat_remote_file_content {
 
-  // container 'docker.io/docker/whalesay:latest'
-  // container = "quay.io/nextflow/bash:latest"
-  container = "docker.io/taniguti/wf-cas9:latest"
-
-  publishDir "publish_dir"
+  container = "docker.io/docker/whalesay:latest"
+  // container = "docker.io/taniguti/wf-cas9:latest"
 
   input: path message
 
-  output:
-    stdout emit: cat
+  output: stdout emit: cat
 
   script:
   """
