@@ -4,8 +4,8 @@ nextflow.enable.dsl=2
 
 process echo_remote_file_content {
 
-  container = "docker.io/taniguti/wf-cas9:latest"   // this does not work :(
-  // container = "docker.io/docker/whalesay:latest" // this works!!
+  container = "docker.io/biocontainers/biocontainers:v1.2.0_cv1" // does not work :(
+  // container = "docker.io/docker/whalesay:latest" // works! both images are public
 
   input: path remote_file
 
