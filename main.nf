@@ -4,8 +4,8 @@ nextflow.enable.dsl=2
 
 process echo_remote_file_content {
 
-  container = "docker.io/biocontainers/biocontainers:v1.2.0_cv1" // does not work :(
-  // container = "docker.io/docker/whalesay:latest" // works! both images are public
+  // container = "docker.io/biocontainers/biocontainers:v1.2.0_cv1" // does not work :(
+  container = "docker.io/docker/whalesay:latest" // works! both images are public
 
   input: path remote_file
 
@@ -16,5 +16,5 @@ process echo_remote_file_content {
 
 workflow {
   echo_remote_file_content(params.remote_file)
-  println echo_remote_file_content.out.cat.view()
+  echo_remote_file_content.out.cat.view()
 }
